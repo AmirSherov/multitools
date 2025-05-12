@@ -27,9 +27,8 @@ const Hero: FC<HeroProps> = ({ onScrollClick, showScroll = true }) => {
         </p>
         <div className="mainpage-hero__buttons">
           <a 
-            href="#tools" 
+            href="/pages/auth" 
             className="btn btn-primary"
-            onClick={(e) => handleButtonClick('tools', e)}
           >
             Начать сейчас
           </a>

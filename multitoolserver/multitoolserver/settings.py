@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,11 @@ CORS_ALLOW_ALL_ORIGINS = True
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'sher4mir@gmail.com'  
+EMAIL_HOST_PASSWORD = 'uqzx hrty fcad dzlq'  
+DEFAULT_FROM_EMAIL = 'MultiTools <sher4mir@gmail.com>' 

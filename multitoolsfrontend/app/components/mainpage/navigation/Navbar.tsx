@@ -58,7 +58,7 @@ export default function Navbar() {
               Поддержка
             </Link>
             <div className="navbar__buttons">
-              <Link href="/login" className="btn btn-outline navbar__button-login">
+              <Link href="/pages/auth" className="btn btn-outline navbar__button-login">
                 Начать
               </Link>
             </div>

@@ -1,0 +1,122 @@
+@import '../auth.scss';
+
+.auth-form-register {
+  max-width: 500px;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0;
+  
+  @media (max-width: 550px) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-group {
+    flex: 1;
+  }
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+  
+  label {
+    display: block;
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    margin-bottom: 0.3rem;
+  }
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  
+  input[type="checkbox"] {
+    margin-top: 0.2rem;
+  }
+  
+  label {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    margin: 0;
+    
+    a {
+      color: #5046e5;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Стили для формы верификации email
+.verification-code-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 2rem 0;
+}
+
+.verification-code-input {
+  width: 45px;
+  height: 55px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1e1e1e;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.2s;
+  
+  &:focus {
+    border-color: #5046e5;
+    box-shadow: 0 0 0 2px rgba(80, 70, 229, 0.2);
+    outline: none;
+  }
+}
+
+.resend-code {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  
+  a {
+    color: #5046e5;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-form-register {
+    padding: 1.5rem 1rem;
+  }
+  
+  .verification-code-input {
+    width: 40px;
+    height: 48px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .verification-code-input {
+    width: 35px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+}

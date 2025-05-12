@@ -15,9 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from .test import TestView
+from django.urls import path, include
+from .awake import AwakeView
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/test/', TestView.as_view(), name='test'),
+    path('api/v1/auth/', include('authentication.urls')),
+    path('api/v1/awakeserver/', AwakeView.as_view()),
 ]

@@ -8,13 +8,33 @@ import "./page.scss"
 import Hero from './components/mainpage/Hero/Hero'
 import Features from './components/mainpage/features/Features'
 import Tools from './components/mainpage/tools-landing/Tools'
-
 export default function Home() {
   const [isVisible, setIsVisible] = useState(true);
+  const [serverAwake, setServerAwake] = useState(false);
   const featuresRef = useRef<HTMLDivElement>(null);
   const toolsRef = useRef<HTMLDivElement>(null);
-
+  
+  function awakeserver() {
+    const interval = setInterval(() => {
+      console.log('Подключение к серверу...');
+      fetch('http://127.0.0.1:8000/api/v1/awakeserver/')
+        .then(response => response.json())
+        .then(data => {
+          if(data.message === 'Server is awake') {
+            console.log('Подключение к серверу успешно!');
+            setServerAwake(true);
+            clearInterval(interval);
+          }
+        })
+        .catch(error => {
+          console.log('Ошибка подключения к серверу!');
+        });
+    }, 2000);
+    return interval;
+  }
+  
   useEffect(() => {
+    const intervalId = awakeserver();
     const handleScroll = () => {
       if (window.scrollY > 100) {
         setIsVisible(false);
@@ -26,13 +46,17 @@ export default function Home() {
     handleScroll();
     
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearInterval(intervalId);
+    };
   }, []);
 
   const scrollToFeatures = () => {
     if (featuresRef.current) {
       featuresRef.current.scrollIntoView({ behavior: 'smooth' });
     }
+
   };
 
   return (

@@ -12,6 +12,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
+      <link rel="icon" href="./logo.png" />
       <body>
         {children}
       </body>
