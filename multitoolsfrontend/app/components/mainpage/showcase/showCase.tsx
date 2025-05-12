@@ -40,12 +40,11 @@ export default function ShowCase() {
               </Link>
             </div>
             <div className="showcase__image">
-              <Image 
+              <img
                 src="/images/mainpage/server.avif" 
                 alt="MultiTools в действии" 
                 width={600} 
                 height={400}
-                priority
               />
             </div>
           </div>
