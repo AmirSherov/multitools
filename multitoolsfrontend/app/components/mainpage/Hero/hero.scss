@@ -1,0 +1,204 @@
+.mainpage-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 0;
+  background-image: radial-gradient(circle, rgba(66, 99, 255, 0.1) 0%, rgba(15, 15, 30, 0.9) 100%), url('/images/mainpage/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(140, 67, 255, 0.2) 0%, rgba(15, 15, 30, 0.85) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, rgba(15, 15, 30, 1) 0%, rgba(15, 15, 30, 0) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+
+.mainpage-hero__content {
+  position: relative;
+  z-index: 5;
+  max-width: 900px;
+  padding: 0 1.5rem;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.mainpage-hero__title {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  animation: slideInUp 0.8s ease-out forwards;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+  span {
+    display: block;
+    background: linear-gradient(to right, #8c43ff, #f62c84, #4263ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 5s ease infinite;
+    background-size: 200% auto;
+  }
+}
+
+.mainpage-hero__subtitle {
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: slideInUp 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.mainpage-hero__buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  animation: slideInUp 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  position: relative;
+  z-index: 10;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.6s ease;
+      pointer-events: none;
+    }
+
+    &:hover::before {
+      left: 100%;
+    }
+
+    &.btn-primary {
+      transform: translateY(0);
+      box-shadow: 0 10px 20px rgba(140, 67, 255, 0.3);
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 25px rgba(140, 67, 255, 0.4);
+      }
+    }
+
+    &.btn-outline {
+      border: 2px solid rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        border-color: #8c43ff;
+        box-shadow: 0 5px 15px rgba(140, 67, 255, 0.2);
+      }
+    }
+  }
+}
+
+.mainpage-hero__scroll {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.8);
+  z-index: 5;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+  transition: all 0.3s ease;
+  padding: 1rem;
+  border-radius: 50%;
+  background: rgba(140, 67, 255, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    color: #fff;
+    background: rgba(140, 67, 255, 0.4);
+    transform: translateX(-50%) scale(1.1);
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-20px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-10px) translateX(-50%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+} 

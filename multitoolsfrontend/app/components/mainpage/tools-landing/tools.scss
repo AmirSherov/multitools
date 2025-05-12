@@ -1,0 +1,245 @@
+.tools-landing {
+  padding: 8rem 0;
+  background-color: rgba(20, 20, 35, 0.5);
+  position: relative;
+  z-index: 1;
+  
+  &__heading {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      
+      &.is-visible {
+        opacity: 1;
+      }
+    }
+    
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: var(--muted-text);
+      margin-bottom: 3rem;
+      
+      &.is-visible {
+        opacity: 1;
+      }
+    }
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    
+    .tool-item {
+      opacity: 1;
+      
+      &.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+  
+  &__more {
+    margin-top: 4rem;
+    text-align: center;
+    opacity: 1;
+    
+    &.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.section {
+  padding: 6rem 0;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+  
+  &__item {
+    padding: 0.75rem 1.5rem;
+    border-radius: 100px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all var(--transition-normal);
+    font-weight: 500;
+    border: 1px solid transparent;
+    
+    &:hover {
+      background: rgba(140, 67, 255, 0.1);
+      border-color: rgba(140, 67, 255, 0.3);
+    }
+    
+    &--active {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: 0 5px 15px rgba(140, 67, 255, 0.3);
+      
+      &:hover {
+        background: var(--gradient-primary);
+        border-color: transparent;
+      }
+    }
+  }
+}
+
+.tool-card-landing-page {
+  background: var(--card-bg);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    
+    .tool-card-landing-page__img {
+      transform: scale(1.05);
+    }
+  }
+  
+  &__image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+  }
+  
+  &__content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  &__tags {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 1;
+  }
+  
+  &__tag {
+    padding: 0.35rem 0.75rem;
+    background: var(--accent-color);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 100px;
+    
+    &:nth-child(2) {
+      background: var(--primary-color);
+    }
+    
+    &:nth-child(3) {
+      background: var(--secondary-color);
+    }
+  }
+  
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: white;
+  }
+  
+  &__description {
+    color: var(--muted-text);
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+  
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    align-self: flex-start;
+    
+    svg {
+      transition: transform var(--transition-fast);
+    }
+    
+    &:hover {
+      color: var(--accent-color);
+      
+      svg {
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1200px) {
+  .tools-landing {
+    padding: 5rem 0;
+  }
+}
+
+@media (max-width: 992px) {
+  .tools-landing {
+    padding: 4rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .tools-landing {
+    padding: 3rem 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .tools-landing {
+    padding: 2.5rem 0;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+} 

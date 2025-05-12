@@ -1,0 +1,88 @@
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1rem 0;
+    transition: all var(--transition-normal);
+    background: transparent;
+    
+    &--scrolled {
+      background: rgba(15, 15, 30, 0.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      padding: 0.75rem 0;
+    }
+    
+    &__container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    &__logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-color);
+      
+      &-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.75rem;
+        color: var(--primary-color);
+      }
+    }
+    
+    &__menu {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      
+      @media (max-width: 992px) {
+        display: none;
+      }
+    }
+    
+    &__link {
+      position: relative;
+      color: var(--text-color);
+      font-weight: 500;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: width var(--transition-normal);
+      }
+      
+      &:hover::after {
+        width: 100%;
+      }
+    }
+    
+    &__buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    &__mobile-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      cursor: pointer;
+      
+      @media (max-width: 992px) {
+        display: block;
+      }
+    }
+  }

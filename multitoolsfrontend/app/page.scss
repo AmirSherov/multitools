@@ -1,0 +1,70 @@
+@import './styles/globals.scss';
+
+.mainlanding-page {
+  position: relative;
+  overflow: hidden;
+}
+
+
+@media (max-width: 1200px) {
+  .section {
+    padding: 5rem 0;
+  }
+}
+
+@media (max-width: 992px) {
+  .section {
+    padding: 4rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 0;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .hero__title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .section {
+    padding: 2.5rem 0;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
