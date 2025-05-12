@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-f!1s0io0o2(i6%tw!okf@^e6lp@&-!nk7i*c=8g&#e&#uw*#fr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['multitools.onrender.com', 'multitoolservice.netlify.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['multitools.onrender.com', 'multitoolservice.netlify.app', 'localhost', '127.0.0.1', 'multitoolserver.onrender.com']
 
 
 # Application definition
