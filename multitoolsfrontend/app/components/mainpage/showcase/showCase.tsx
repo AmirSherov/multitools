@@ -41,7 +41,7 @@ export default function ShowCase() {
             </div>
             <div className="showcase__image">
               <Image 
-                src="/images/mainpage/showcase.jpg" 
+                src="/images/mainpage/server.avif" 
                 alt="MultiTools в действии" 
                 width={600} 
                 height={400}
