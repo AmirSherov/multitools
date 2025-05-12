@@ -6,6 +6,7 @@ import ShowCase from "./components/mainpage/showcase/showCase"
 import { useState, useEffect, useRef } from "react"
 import "./page.scss"
 import Hero from './components/mainpage/Hero/Hero'
+import { NotifyProvider , notify } from 'amirdev-notify'
 import Features from './components/mainpage/features/Features'
 import Tools from './components/mainpage/tools-landing/Tools'
 export default function Home() {
@@ -22,6 +23,11 @@ export default function Home() {
         .then(data => {
           if(data.message === 'Server is awake') {
             console.log('Подключение к серверу успешно!');
+            notify({
+              message: 'Подключение к серверу успешно!',
+              type: 'success',
+              delay:1
+            })
             setServerAwake(true);
             clearInterval(interval);
           }
@@ -61,6 +67,7 @@ export default function Home() {
 
   return (
     <main className="mainlanding-page">
+      <NotifyProvider>
       <ParticlesBackground />
       <Navbar />
       <Hero onScrollClick={scrollToFeatures} showScroll={isVisible} />
@@ -76,6 +83,7 @@ export default function Home() {
       </div>
       
       <Footer />
+      </NotifyProvider>
     </main>
   );
 }
