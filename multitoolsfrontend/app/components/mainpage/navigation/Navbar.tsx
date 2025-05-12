@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import MobileMenu from './MobileMenu.tsx';
+import MobileMenu from './MobileMenu';
 import "./navbar.scss"
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
