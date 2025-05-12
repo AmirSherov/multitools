@@ -18,8 +18,9 @@ export default function Home() {
   function awakeserver() {
     const interval = setInterval(() => {
       console.log('Подключение к серверу...');
-      fetch('http://127.0.0.1:8000/api/v1/awakeserver/')
-        .then(response => response.json())
+      // fetch('http://127.0.0.1:8000/api/v1/awakeserver/')
+      fetch('https://multitoolserver.onrender.com/api/v1/awakeserver/')
+      .then(response => response.json())
         .then(data => {
           if(data.message === 'Server is awake') {
             console.log('Подключение к серверу успешно!');

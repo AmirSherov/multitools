@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-f!1s0io0o2(i6%tw!okf@^e6lp@&-!nk7i*c=8g&#e&#uw*#fr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://multitools.onrender.com', 'https://multitoolservice.netlify.app', 'http://localhost:3000']
+ALLOWED_HOSTS = ['multitools.onrender.com', 'multitoolservice.netlify.app', 'localhost', '127.0.0.1']
 
 
 # Application definition

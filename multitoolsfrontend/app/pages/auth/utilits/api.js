@@ -8,7 +8,8 @@ import { notify } from 'amirdev-notify'
  */
 export const verifyToken = async (token) => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/v1/auth/verify-token/', {
+    // const response = await fetch('http://127.0.0.1:8000/api/v1/auth/verify-token/', {
+    const response = await fetch('https://multitoolserver.onrender.com/api/v1/auth/verify-token/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +44,8 @@ export const verifyToken = async (token) => {
  */
 export const login = async (email, password) => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/v1/auth/login/', {
+    // const response = await fetch('http://127.0.0.1:8000/api/v1/auth/login/', {
+    const response = await fetch('https://multitoolserver.onrender.com/api/v1/auth/login/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -84,7 +86,8 @@ export const logout = async () => {
   try {
     const token = getCookie('auth_token')
     if (token) {
-      await fetch('http://127.0.0.1:8000/api/v1/auth/logout/', {
+      // await fetch('http://127.0.0.1:8000/api/v1/auth/logout/', {
+      await fetch('https://multitoolserver.onrender.com/api/v1/auth/logout/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -109,7 +112,8 @@ export const logout = async () => {
  */
 export const register = async (userData) => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/v1/auth/register/', {
+    // const response = await fetch('http://127.0.0.1:8000/api/v1/auth/register/', {
+    const response = await fetch('https://multitoolserver.onrender.com/api/v1/auth/register/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -166,7 +170,8 @@ export const register = async (userData) => {
  */
 export const verifyEmail = async (email, code) => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/v1/auth/verify-email/', {
+    // const response = await fetch('http://127.0.0.1:8000/api/v1/auth/verify-email/', {
+    const response = await fetch('https://multitoolserver.onrender.com/api/v1/auth/verify-email/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -215,7 +220,8 @@ export const verifyEmail = async (email, code) => {
  */
 export const resendVerificationCode = async (email) => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/v1/auth/resend-code/', {
+    // const response = await fetch('http://127.0.0.1:8000/api/v1/auth/resend-code/', {
+    const response = await fetch('https://multitoolserver.onrender.com/api/v1/auth/resend-code/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
