@@ -1,6 +1,6 @@
 import { setCookie, getCookie, deleteCookie } from '../../../utilits/cookies'
 import { notify } from 'amirdev-notify'
-
+import { api_url } from '../../../utilits/static'
 /**
  * Проверяет токен пользователя
  * @param {string} token - токен для проверки
@@ -8,8 +8,7 @@ import { notify } from 'amirdev-notify'
  */
 export const verifyToken = async (token) => {
   try {
-    // const response = await fetch('http://127.0.0.1:8000/api/v1/auth/verify-token/', {
-    const response = await fetch('https://multitoolserver.onrender.com/api/v1/auth/verify-token/', {
+    const response = await fetch(`${api_url}api/v1/auth/verify-token/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,7 +28,8 @@ export const verifyToken = async (token) => {
     notify({
       delay: 2,
       message: 'Ошибка проверки токена. Попробуйте позже.',
-      type: 'error'
+      type: 'error',
+      position: 'top-center'
     })
     console.error('Ошибка проверки токена:', error)
     return false
@@ -44,8 +44,7 @@ export const verifyToken = async (token) => {
  */
 export const login = async (email, password) => {
   try {
-    // const response = await fetch('http://127.0.0.1:8000/api/v1/auth/login/', {
-    const response = await fetch('https://multitoolserver.onrender.com/api/v1/auth/login/', {
+    const response = await fetch(`${api_url}api/v1/auth/login/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -60,7 +59,8 @@ export const login = async (email, password) => {
       notify({
         delay: 3,
         message: 'Вы успешно вошли в систему',
-        type: 'success'
+        type: 'success',
+        position: 'top-center'
       })
       return { success: true, error: null }
     } else {
@@ -71,7 +71,8 @@ export const login = async (email, password) => {
     notify({
       delay: 2,
       message: 'Ошибка сервера. Попробуйте позже.',
-      type: 'error'
+      type: 'error',
+       position: 'top-center'
     })
     console.error('Ошибка входа:', error)
     return { success: false, error: 'Ошибка сервера. Попробуйте позже.' }
@@ -86,8 +87,7 @@ export const logout = async () => {
   try {
     const token = getCookie('auth_token')
     if (token) {
-      // await fetch('http://127.0.0.1:8000/api/v1/auth/logout/', {
-      await fetch('https://multitoolserver.onrender.com/api/v1/auth/logout/', {
+      await fetch(`${api_url}api/v1/auth/logout/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,8 +112,7 @@ export const logout = async () => {
  */
 export const register = async (userData) => {
   try {
-    // const response = await fetch('http://127.0.0.1:8000/api/v1/auth/register/', {
-    const response = await fetch('https://multitoolserver.onrender.com/api/v1/auth/register/', {
+    const response = await fetch(`${api_url}api/v1/auth/register/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -134,7 +133,8 @@ export const register = async (userData) => {
       notify({
         delay: 3,
         message: 'Регистрация успешна! Проверьте вашу почту для подтверждения.',
-        type: 'success'
+        type: 'success',
+         position: 'top-center'
       })
       return { 
         success: true, 
@@ -155,7 +155,8 @@ export const register = async (userData) => {
     notify({
       delay: 2,
       message: 'Ошибка сервера. Попробуйте позже.',
-      type: 'error'
+      type: 'error',
+       position: 'top-center'
     })
     console.error('Ошибка регистрации:', error)
     return { success: false, error: 'Ошибка сервера. Попробуйте позже.', userId: null, email: null }
@@ -170,8 +171,7 @@ export const register = async (userData) => {
  */
 export const verifyEmail = async (email, code) => {
   try {
-    // const response = await fetch('http://127.0.0.1:8000/api/v1/auth/verify-email/', {
-    const response = await fetch('https://multitoolserver.onrender.com/api/v1/auth/verify-email/', {
+    const response = await fetch(`${api_url}api/v1/auth/verify-email/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -187,7 +187,8 @@ export const verifyEmail = async (email, code) => {
       notify({
         delay: 3,
         message: 'Email подтвержден! Вы успешно вошли в систему.',
-        type: 'success'
+        type: 'success',
+         position: 'top-center'
       })
       
       return { 
@@ -206,7 +207,8 @@ export const verifyEmail = async (email, code) => {
     notify({
       delay: 2,
       message: 'Ошибка сервера. Попробуйте позже.',
-      type: 'error'
+      type: 'error',
+       position: 'top-center'
     })
     console.error('Ошибка подтверждения email:', error)
     return { success: false, error: 'Ошибка сервера. Попробуйте позже.', token: null }
@@ -220,8 +222,7 @@ export const verifyEmail = async (email, code) => {
  */
 export const resendVerificationCode = async (email) => {
   try {
-    // const response = await fetch('http://127.0.0.1:8000/api/v1/auth/resend-code/', {
-    const response = await fetch('https://multitoolserver.onrender.com/api/v1/auth/resend-code/', {
+    const response = await fetch(`${api_url}api/v1/auth/resend-code/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -235,7 +236,8 @@ export const resendVerificationCode = async (email) => {
       notify({
         delay: 3,
         message: 'Новый код отправлен на вашу почту!',
-        type: 'success'
+        type: 'success',
+        position: 'top-center'
       })
       return { success: true, error: null }
     } else {

@@ -9,6 +9,7 @@ import Hero from './components/mainpage/Hero/Hero'
 import { NotifyProvider , notify } from 'amirdev-notify'
 import Features from './components/mainpage/features/Features'
 import Tools from './components/mainpage/tools-landing/Tools'
+import { api_url } from './utilits/static'
 export default function Home() {
   const [isVisible, setIsVisible] = useState(true);
   const [serverAwake, setServerAwake] = useState(false);
@@ -18,8 +19,7 @@ export default function Home() {
   function awakeserver() {
     const interval = setInterval(() => {
       console.log('Подключение к серверу...');
-      // fetch('http://127.0.0.1:8000/api/v1/awakeserver/')
-      fetch('https://multitoolserver.onrender.com/api/v1/awakeserver/')
+      fetch(`${api_url}api/v1/awakeserver/`)
       .then(response => response.json())
         .then(data => {
           if(data.message === 'Server is awake') {
@@ -27,7 +27,8 @@ export default function Home() {
             notify({
               message: 'Подключение к серверу успешно!',
               type: 'success',
-              delay:1
+              delay:3,
+              position: 'top-center'
             })
             setServerAwake(true);
             clearInterval(interval);
@@ -36,7 +37,7 @@ export default function Home() {
         .catch(error => {
           console.log('Ошибка подключения к серверу!');
         });
-    }, 2000);
+    }, 5000);
     return interval;
   }
   

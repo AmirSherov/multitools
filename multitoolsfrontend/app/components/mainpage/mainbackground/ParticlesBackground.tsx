@@ -19,72 +19,44 @@ export default function OptimizedParticlesBackground() {
             enable: false,
             zIndex: -1
           },
-          fpsLimit: 45,
+          fpsLimit: 20,
           particles: {
             number: {
-              value: 80,
+              value: 20,
               density: {
                 enable: true,
-                value_area: 1000
+                value_area: 600
               }
             },
             color: {
-              value: ['#8c43ff', '#4263ff', '#f62c84', '#00bcd4']
+              value: '#8c43ff'
             },
             shape: {
-              type: ['circle', 'polygon'],
-              polygon: {
-                sides: 5
-              }
+              type: 'circle'
             },
             opacity: {
-              value: 0.4,
-              random: true,
-              anim: {
-                enable: false
-              }
+              value: 0.2
             },
             size: {
-              value: 3,
-              random: true,
-              anim: {
-                enable: false
-              }
+              value: 1.5
             },
             move: {
               enable: true,
-              speed: 1.5,
-              direction: 'none',
-              out_mode: 'out',
-              random: false,
-              straight: false,
+              speed: 0.3,
+              out_mode: 'out'
             },
             links: {
-              enable: true,
-              distance: 120,
-              color: '#8c43ff',
-              opacity: 0.2,
-              width: 1
+              enable: false
             }
           },
           interactivity: {
-            detect_on: "window",
+            detect_on: 'canvas',
             events: {
               onhover: {
-                enable: true,
-                mode: 'repulse'
+                enable: false
               },
               onclick: {
-                enable: true,
-                mode: 'push'
-              }
-            },
-            modes: {
-              repulse: {
-                distance: 100
-              },
-              push: {
-                particles_nb: 4
+                enable: false
               }
             }
           },
@@ -93,8 +65,8 @@ export default function OptimizedParticlesBackground() {
             color: 'transparent'
           }
         }}
-        style={{ 
-          position: 'absolute', 
+        style={{
+          position: 'absolute',
           zIndex: 0,
           top: 0,
           left: 0,

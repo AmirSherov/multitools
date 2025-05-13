@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,12 +80,42 @@ WSGI_APPLICATION = 'multitoolserver.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+# Настройка для SQLite (локальная база данных)
+SQLITE_DB = {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': BASE_DIR / 'db.sqlite3',
 }
+
+# Настройка для PostgreSQL на Render
+POSTGRESQL_DB = {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'multitooldb',
+    'USER': 'amirdev',
+    'PASSWORD': 'FttB48UkLt1xGkcR5g0jq8q4pcUMHaxc',
+    'HOST': 'dpg-d0ho0mc9c44c739natpg-a.oregon-postgres.render.com',
+    'PORT': '5432',
+}
+
+# Настройки базы данных
+# ВЫБЕРИТЕ КАКУЮ БАЗУ ИСПОЛЬЗОВАТЬ - раскомментируйте нужную строку:
+DATABASES = {
+    # 'default': SQLITE_DB  # SQLite (локальная)
+    'default': POSTGRESQL_DB  # PostgreSQL на Render
+}
+
+# Также можно использовать DATABASE_URL из переменных окружения (если он задан)
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+# Или напрямую использовать полный URL подключения:
+# DATABASES['default'] = dj_database_url.config(
+#     default='postgresql://amirdev:FttB48UkLt1xGkcR5g0jq8q4pcUMHaxc@dpg-d0ho0mc9c44c739natpg-a.oregon-postgres.render.com/multitooldb',
+#     conn_max_age=600,
+#     conn_health_checks=True,
+# )
 
 
 # Password validation

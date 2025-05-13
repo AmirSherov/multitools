@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./styles/globals.scss";
+import { GlobalContextProvider } from "./context/GlobalContext";
 
 export const metadata: Metadata = {
   title: "MultiTools - Мощные инструменты для обработки данных",
@@ -14,7 +15,9 @@ export default function RootLayout({
     <html lang="ru">
       <link rel="icon" href="./logo.png" />
       <body>
-        {children}
+        <GlobalContextProvider>
+          {children}
+        </GlobalContextProvider>
       </body>
     </html>
   );

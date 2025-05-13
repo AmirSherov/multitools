@@ -24,6 +24,9 @@ class LoginView(APIView):
             return Response({
                 'user_id': user.id,
                 'email': user.email,
+                'username': user.username,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
                 'token': token_serializer.data['token'],
                 'expires_at': token_serializer.data['expires_at']
             }, status=status.HTTP_200_OK)
@@ -59,6 +62,9 @@ class EmailVerificationView(APIView):
             return Response({
                 'user_id': user.id,
                 'email': user.email,
+                'username': user.username,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
                 'token': token_serializer.data['token'],
                 'expires_at': token_serializer.data['expires_at'],
                 'message': 'Email успешно подтвержден'

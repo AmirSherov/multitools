@@ -44,15 +44,6 @@ export default function AuthPage() {
     setLoading(false)
   }
 
-  const handleLogout = async () => {
-    setLoading(true)
-    const success = await logout()
-    if (success) {
-      setIsLoggedIn(false)
-    }
-    setLoading(false)
-  }
-
   return (
     <div className="auth-container">
       <NotifyProvider>
