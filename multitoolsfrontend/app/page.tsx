@@ -36,7 +36,7 @@ export default function Home() {
         .catch(error => {
           console.log('Ошибка подключения к серверу!');
         });
-    }, 2000);
+    }, 5000);
     return interval;
   }
   
