@@ -4,26 +4,42 @@ import './auth.scss'
 import Loader from '../../components/loader'
 import { getCookie } from '../../utilits/cookies'
 import { NotifyProvider } from 'amirdev-notify'
-import { verifyToken, login, logout } from './utilits/api'
+import { verifyToken, login, logout, getCurrentUser } from './utilits/api'
+import { useRouter } from 'next/navigation'
+import { useGlobalContext } from '../../context/GlobalContext'
 
 export default function AuthPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const router = useRouter()
+  const {state, dispatch} = useGlobalContext()
 
   useEffect(() => {
-    const token = getCookie('auth_token')
-    if (token) {
-      checkToken(token)
+    const checkAuth = async () => {
+      const token = getCookie('auth_token')
+      if (token) {
+        try {
+          const tokenValid = await verifyToken(token)
+          if (tokenValid) {
+            const userResult = await getCurrentUser()
+            if (userResult.success) {
+              dispatch({type: 'SET_USER', payload: userResult.data})
+              router.push('/pages/tools')
+              return
+            }
+          }
+        } catch (error) {
+          console.error('Ошибка проверки авторизации:', error)
+        }
+      }
+      
+      setLoading(false)
     }
-  }, [])
-
-  const checkToken = async (token) => {
-    const isValid = await verifyToken(token)
-    setIsLoggedIn(isValid)
-  }
+    
+    checkAuth()
+  }, [router, dispatch])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -33,15 +49,18 @@ export default function AuthPage() {
     const result = await login(email, password)
     
     if (result.success) {
-      setIsLoggedIn(true)
+      dispatch({type: 'SET_USER', payload: result.data})
       setTimeout(() => {
-        window.location.href = '/pages/tools'
+        router.push('/pages/tools')
       }, 1500)
     } else {
       setError(result.error)
+      setLoading(false)
     }
-    
-    setLoading(false)
+  }
+
+  if (loading) {
+    return <Loader />
   }
 
   return (

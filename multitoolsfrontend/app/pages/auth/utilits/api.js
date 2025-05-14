@@ -1,6 +1,7 @@
 import { setCookie, getCookie, deleteCookie } from '../../../utilits/cookies'
 import { notify } from 'amirdev-notify'
 import { api_url } from '../../../utilits/static'
+
 /**
  * Проверяет токен пользователя
  * @param {string} token - токен для проверки
@@ -62,7 +63,8 @@ export const login = async (email, password) => {
         type: 'success',
         position: 'top-center'
       })
-      return { success: true, error: null }
+      console.log(data)
+      return { success: true, error: null, data: data }
     } else {
       const errorMessage = data.email || data.password || data.non_field_errors || 'Ошибка входа'
       return { success: false, error: errorMessage }
@@ -96,6 +98,12 @@ export const logout = async () => {
       })
       
       deleteCookie('auth_token')
+      notify({
+        delay: 2,
+        message: 'Вы успешно вышли из системы',
+        type: 'success',
+        position: 'top-center'
+      })
       return true
     }
     return false
@@ -251,5 +259,38 @@ export const resendVerificationCode = async (email) => {
     })
     console.error('Ошибка отправки кода:', error)
     return { success: false, error: 'Ошибка сервера. Попробуйте позже.' }
+  }
+}
+
+/**
+ * Получает данные текущего пользователя по токену
+ * @returns {Promise<{success: boolean, data: Object|null, error: string|null}>}
+ */
+export const getCurrentUser = async () => {
+  try {
+    const token = getCookie('auth_token')
+    
+    if (!token) {
+      return { success: false, data: null, error: 'Токен не найден' }
+    }
+    
+    const response = await fetch(`${api_url}api/v1/auth/me/`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Token ${token}`,
+        'Content-Type': 'application/json',
+      }
+    })
+    
+    const data = await response.json()
+    
+    if (response.ok) {
+      return { success: true, data, error: null }
+    } else {
+      return { success: false, data: null, error: data.detail || 'Не удалось получить данные пользователя' }
+    }
+  } catch (error) {
+    console.error('Ошибка получения данных пользователя:', error)
+    return { success: false, data: null, error: 'Ошибка сервера. Попробуйте позже.' }
   }
 } 

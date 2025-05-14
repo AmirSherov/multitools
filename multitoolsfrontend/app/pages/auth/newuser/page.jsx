@@ -1,9 +1,12 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './newuser.scss'
 import Loader from '../../../components/loader'
 import { NotifyProvider } from 'amirdev-notify'
-import { register, verifyEmail, resendVerificationCode } from '../utilits/api'
+import { register, verifyEmail, resendVerificationCode, verifyToken, getCurrentUser } from '../utilits/api'
+import { useRouter } from 'next/navigation'
+import { getCookie } from '../../../utilits/cookies'
+import { useGlobalContext } from '../../../context/GlobalContext'
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -19,8 +22,35 @@ export default function RegisterPage() {
   const [verificationCode, setVerificationCode] = useState('')
   const [codeInputs, setCodeInputs] = useState(['', '', '', '', '', ''])
   
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const router = useRouter()
+  const { dispatch } = useGlobalContext()
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = getCookie('auth_token')
+      if (token) {
+        try {
+          const tokenValid = await verifyToken(token)
+          if (tokenValid) {
+            const userResult = await getCurrentUser()
+            if (userResult.success) {
+              dispatch({type: 'SET_USER', payload: userResult.data})
+              router.push('/pages/tools')
+              return
+            }
+          }
+        } catch (error) {
+          console.error('Ошибка проверки авторизации:', error)
+        }
+      }
+      
+      setLoading(false)
+    }
+    
+    checkAuth()
+  }, [router, dispatch])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -80,8 +110,9 @@ export default function RegisterPage() {
     setLoading(false)
     
     if (result.success) {
+      dispatch({type: 'SET_USER', payload: result.data})
       setTimeout(() => {
-        window.location.href = '/pages/tools'
+        router.push('/pages/tools')
       }, 3000)
     } else {
       setError(result.error)
@@ -266,11 +297,13 @@ export default function RegisterPage() {
       </form>
     </div>
   )
+  if (loading) {
+    return <Loader />
+  }
 
   return (
     <div className="auth-container">
       <NotifyProvider>
-        {loading && <Loader />}
         <div className="auth-side">
           <div className="bg-pattern"></div>
           <div className="auth-side-content">
