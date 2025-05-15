@@ -47,6 +47,7 @@ class YouTubeDownloader:
             'no_warnings': True,
             'skip_download': True,
             'noplaylist': True,
+            'cookiefile': os.path.join(os.path.dirname(__file__), '../multitoolserver/cookies.txt'),
         }
         
         try:
@@ -134,6 +135,7 @@ class YouTubeDownloader:
                 'quiet': True,
                 'no_warnings': True,
                 'noplaylist': True,
+                'cookiefile': os.path.join(os.path.dirname(__file__), '../multitoolserver/cookies.txt'),
             }
             
             if ext == 'mp3':
