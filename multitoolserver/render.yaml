@@ -3,7 +3,7 @@ services:
     name: multitoolserver
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn multitoolserver.wsgi:application"
+    startCommand: "gunicorn multitoolserver.wsgi:application --timeout 180"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
