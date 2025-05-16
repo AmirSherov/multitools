@@ -97,15 +97,7 @@ const Sidebar = ({ activeTab }) => {
                   <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              
               <ul className="submenu">
-                <li className={`submenu-item ${activeTab === 'download/youtube' ? 'active' : ''}`} onClick={() => handleToolSelect('download/youtube')}>
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9.5 15.5V8.5L15.5 12L9.5 15.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span>YouTube</span>
-                </li>
                 <li className={`submenu-item ${activeTab === 'download/instagram' ? 'active' : ''}`} onClick={() => handleToolSelect('download/instagram')}>
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -114,7 +106,7 @@ const Sidebar = ({ activeTab }) => {
                   </svg>
                   <span>Instagram</span>
                 </li>
-                <li className={`submenu-item ${activeTab === 'download/tiktok' ? 'active' : ''}`} onClick={() => handleToolSelect('download/tiktok')}>
+                {/* <li className={`submenu-item ${activeTab === 'download/tiktok' ? 'active' : ''}`} onClick={() => handleToolSelect('download/tiktok')}>
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M10 8.5V15.5" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
@@ -122,12 +114,33 @@ const Sidebar = ({ activeTab }) => {
                     <path d="M7.5 12H16.5" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                   <span>TikTok</span>
-                </li>
+                </li> */}
               </ul>
             </li>    
-            
+            <li className={`sidebar-menu-item category ${expandedCategory === 'image' ? 'expanded' : ''} ${activeTab?.startsWith('image') ? 'active' : ''}`}>
+              <div className="sidebar-link" onClick={() => toggleCategory('image')}>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M9 10C10.1046 10 11 9.10457 11 8C11 6.89543 10.1046 6 9 6C7.89543 6 7 6.89543 7 8C7 9.10457 7.89543 10 9 10Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2.67004 18.9501L7.60004 15.6401C8.39004 15.1101 9.53004 15.1701 10.24 15.7801L10.57 16.0701C11.35 16.7401 12.61 16.7401 13.39 16.0701L17.55 12.5001C18.33 11.8301 19.59 11.8301 20.37 12.5001L22 13.9001" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span>Изображение</span>
+                <svg className="arrow-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <ul className="submenu">
+                <li className={`submenu-item ${activeTab === 'image/removebg' ? 'active' : ''}`} onClick={() => handleToolSelect('image/removebg')}>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21.68 16.96L18.55 9.65C17.49 7.17 14.34 7.07 13.14 9.49L11.5 12.76C10.89 13.97 9.47 14.23 8.55 13.31L8.2 12.96C7.22 11.98 5.66 12.26 5.03 13.53L3.05 17.5C2.29 19.04 3.43 20.95 5.13 20.96H19.85C21.63 20.96 22.77 18.88 21.68 16.96Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M17.5 8C18.3284 8 19 7.32843 19 6.5C19 5.67157 18.3284 5 17.5 5C16.6716 5 16 5.67157 16 6.5C16 7.32843 16.6716 8 17.5 8Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>Удалить фон <img src="/aiicon.png" width={18} height={18} style={{position: 'relative', top: '4px'}} alt="" /> </span>
+                </li>
+              </ul>
+            </li>
             <li className="sidebar-menu-item">
-              <Link href="/pages/tools/profile" className="sidebar-link">
+              <Link href="/pages/profile" className="sidebar-link">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12.12 12.78C12.05 12.77 11.96 12.77 11.88 12.78C10.12 12.72 8.72 11.28 8.72 9.51C8.72 7.7 10.18 6.23 12 6.23C13.81 6.23 15.28 7.7 15.28 9.51C15.27 11.28 13.88 12.72 12.12 12.78Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M18.74 19.38C16.96 21.01 14.6 22 12 22C9.4 22 7.04 21.01 5.26 19.38C5.36 18.44 5.96 17.52 7.03 16.8C9.77 14.98 14.25 14.98 16.97 16.8C18.04 17.52 18.64 18.44 18.74 19.38Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

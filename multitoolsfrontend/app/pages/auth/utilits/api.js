@@ -271,26 +271,28 @@ export const getCurrentUser = async () => {
     const token = getCookie('auth_token')
     
     if (!token) {
-      return { success: false, data: null, error: 'Токен не найден' }
+      return { success: false, error: 'Не найден токен авторизации' }
     }
     
     const response = await fetch(`${api_url}api/v1/auth/me/`, {
       method: 'GET',
       headers: {
-        'Authorization': `Token ${token}`,
-        'Content-Type': 'application/json',
+        'Authorization': `Token ${token}`
       }
     })
     
-    const data = await response.json()
-    
-    if (response.ok) {
-      return { success: true, data, error: null }
-    } else {
-      return { success: false, data: null, error: data.detail || 'Не удалось получить данные пользователя' }
+    if (!response.ok) {
+      if (response.status === 401) {
+        deleteCookie('auth_token')
+        return { success: false, error: 'Недействительный токен авторизации' }
+      }
+      return { success: false, error: `Ошибка сервера: ${response.status}` }
     }
+    
+    const data = await response.json()
+    return { success: true, data }
   } catch (error) {
     console.error('Ошибка получения данных пользователя:', error)
-    return { success: false, data: null, error: 'Ошибка сервера. Попробуйте позже.' }
+    return { success: false, error: 'Ошибка сервера. Попробуйте позже.' }
   }
 } 

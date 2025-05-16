@@ -8,6 +8,7 @@ import uuid
 import string
 from datetime import timedelta
 from django.core.exceptions import ValidationError
+from django.db.models import JSONField
 
 # Create your models here.
 
@@ -125,3 +126,27 @@ class EmailVerification(models.Model):
     
     def __str__(self):
         return f"{self.user.username} - {self.email} - {'Подтвержден' if self.is_verified else 'Не подтвержден'}"
+
+class UserStats(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='stats')
+    total_requests = models.PositiveIntegerField(default=0)
+    last_tool = models.CharField(max_length=100, blank=True)
+    last_active = models.DateTimeField(null=True, blank=True)
+    top_tools = JSONField(default=dict, blank=True)  # {'tool_name': count, ...}
+
+    def update_tool(self, tool_name):
+        self.last_tool = tool_name
+        self.last_active = timezone.now()
+        self.total_requests += 1
+        if not self.top_tools:
+            self.top_tools = {}
+        self.top_tools[tool_name] = self.top_tools.get(tool_name, 0) + 1
+        self.save()
+
+    def get_top3(self):
+        if not self.top_tools:
+            return []
+        return sorted(self.top_tools.items(), key=lambda x: -x[1])[:3]
+
+    def __str__(self):
+        return f"Статистика {self.user.username}"

@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-f!1s0io0o2(i6%tw!okf@^e6lp@&-!nk7i*c=8g&#e&#uw*#fr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['multitools.onrender.com', 'multitoolservice.netlify.app', 'localhost', '127.0.0.1', 'multitoolserver.onrender.com']
 
@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'authentication',
     'downloader',
-]
-
+    'image',
+]   
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',

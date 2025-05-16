@@ -14,6 +14,7 @@ const ToolsLayout = ({ children, activeTab }) => {
              activeTab === 'download/youtube' ? 'Скачать с YouTube' :
              activeTab === 'download/instagram' ? 'Скачать с Instagram' :
              activeTab === 'download/tiktok' ? 'Скачать с TikTok' :
+             activeTab === 'image/removebg' ? 'Удаление фона изображения' :
              activeTab === 'profile' ? 'Профиль' : 'Инструменты'}
           </h1>
         </div>

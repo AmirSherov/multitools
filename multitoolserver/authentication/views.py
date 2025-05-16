@@ -3,9 +3,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserLoginSerializer, UserTokenSerializer, UserRegistrationSerializer, EmailVerificationSerializer
-from .models import UserToken, EmailVerification, LoginAttempt
+from .models import UserToken, EmailVerification, LoginAttempt, UserStats
 from django.utils import timezone
 from django.contrib.auth.models import User
+from .stats import get_user_stats_summary
 
 
 class LoginView(APIView):
@@ -72,6 +73,9 @@ class RegisterView(APIView):
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
+            # Создаем статистику для нового пользователя
+            UserStats.objects.create(user=user)
+            print(f"[DEBUG] Создана статистика для нового пользователя {user.username}")
             return Response({
                 'user_id': user.id,
                 'email': user.email,
@@ -217,6 +221,10 @@ class UserMeView(APIView):
                 return Response({'detail': 'Токен просрочен'}, status=status.HTTP_401_UNAUTHORIZED)
             
             user = token.user
+            
+            # Получаем статистику пользователя через функцию из stats.py
+            stats_summary = get_user_stats_summary(user)
+            
             return Response({
                 'id': user.id,
                 'username': user.username,
@@ -224,7 +232,8 @@ class UserMeView(APIView):
                 'first_name': user.first_name,
                 'last_name': user.last_name,
                 'is_staff': user.is_staff,
-                'date_joined': user.date_joined
+                'date_joined': user.date_joined,
+                'stats': stats_summary
             }, status=status.HTTP_200_OK)
                 
         except UserToken.DoesNotExist:
